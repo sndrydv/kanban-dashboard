@@ -1,0 +1,426 @@
+Started by user Project2
+Obtained Jenkinsfile from git https://github.com/sndrydv/kanban-dashboard.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/Project-02-Kanban-CI-CD
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: git
+using credential dockerhub-creds
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Project-02-Kanban-CI-CD/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/sndrydv/kanban-dashboard.git # timeout=10
+Fetching upstream changes from https://github.com/sndrydv/kanban-dashboard.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+using GIT_ASKPASS to set credentials Docker Hub Registry Credentials
+ > git fetch --tags --force --progress -- https://github.com/sndrydv/kanban-dashboard.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 00b2fbc7de93462b1918be2d6369c2973375877c (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 00b2fbc7de93462b1918be2d6369c2973375877c # timeout=10
+Commit message: "updated jenkinfile"
+ > git rev-list --no-walk 00b2fbc7de93462b1918be2d6369c2973375877c # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] timestamps
+[Pipeline] {
+[Pipeline] timeout
+[2026-11-27T08:27:33.262Z] Timeout set to expire in 30 min
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] checkout
+[2026-11-27T08:27:33.469Z] The recommended git tool is: git
+[2026-11-27T08:27:33.473Z] using credential dockerhub-creds
+[2026-11-27T08:27:33.484Z]  > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Project-02-Kanban-CI-CD/.git # timeout=10
+[2026-11-27T08:27:33.493Z] Fetching changes from the remote Git repository
+[2026-11-27T08:27:33.495Z]  > git config remote.origin.url https://github.com/sndrydv/kanban-dashboard.git # timeout=10
+[2026-11-27T08:27:33.504Z] Fetching upstream changes from https://github.com/sndrydv/kanban-dashboard.git
+[2026-11-27T08:27:33.504Z]  > git --version # timeout=10
+[2026-11-27T08:27:33.514Z]  > git --version # 'git version 2.43.0'
+[2026-11-27T08:27:33.515Z] using GIT_ASKPASS to set credentials Docker Hub Registry Credentials
+[2026-11-27T08:27:33.523Z]  > git fetch --tags --force --progress -- https://github.com/sndrydv/kanban-dashboard.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+[2026-11-27T08:27:34.113Z]  > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+[2026-11-27T08:27:34.122Z] Checking out Revision 00b2fbc7de93462b1918be2d6369c2973375877c (refs/remotes/origin/main)
+[2026-11-27T08:27:34.122Z]  > git config core.sparsecheckout # timeout=10
+[2026-11-27T08:27:34.129Z]  > git checkout -f 00b2fbc7de93462b1918be2d6369c2973375877c # timeout=10
+[2026-11-27T08:27:34.168Z] Commit message: "updated jenkinfile"
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+[2026-11-27T08:27:34.588Z] + git rev-parse --short=12 HEAD
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] echo
+[2026-11-27T08:27:34.764Z] Building image: suri175/kanban-dashboard:7-00b2fbc7de93
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker Hub Login)
+[Pipeline] withCredentials
+[2026-11-27T08:27:35.013Z] Masking supported pattern matches of $DOCKER_PASS
+[Pipeline] {
+[Pipeline] sh
+[2026-11-27T08:27:35.373Z] + set +x
+[2026-11-27T08:27:36.719Z] 
+[2026-11-27T08:27:36.719Z] WARNING! Your credentials are stored unencrypted in '/var/lib/jenkins/.docker/config.json'.
+[2026-11-27T08:27:36.719Z] Configure a credential helper to remove this warning. See
+[2026-11-27T08:27:36.719Z] https://docs.docker.com/go/credential-store/
+[2026-11-27T08:27:36.719Z] 
+[2026-11-27T08:27:36.719Z] Login Succeeded
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker Build)
+[Pipeline] sh
+[2026-11-27T08:27:37.222Z] + set -eu
+[2026-11-27T08:27:37.222Z] + echo Pulling Node.js base image...
+[2026-11-27T08:27:37.222Z] Pulling Node.js base image...
+[2026-11-27T08:27:37.222Z] + docker pull node:22-alpine
+[2026-11-27T08:27:38.567Z] 22-alpine: Pulling from library/node
+[2026-11-27T08:27:38.567Z] Digest: sha256:1314fb30ec37592d5845e5a160d522c0e680972aa534549940b8d73bde88481a
+[2026-11-27T08:27:38.567Z] Status: Image is up to date for node:22-alpine
+[2026-11-27T08:27:38.567Z] docker.io/library/node:22-alpine
+[2026-11-27T08:27:38.567Z] + echo Pulling Nginx base image...
+[2026-11-27T08:27:38.567Z] Pulling Nginx base image...
+[2026-11-27T08:27:38.567Z] + docker pull nginx:alpine
+[2026-11-27T08:27:39.911Z] alpine: Pulling from library/nginx
+[2026-11-27T08:27:40.162Z] Digest: sha256:7fc0fb4af7bf006aeb31aea88069976060f8f0a0a86b667126742cc17f4e31ae
+[2026-11-27T08:27:40.162Z] Status: Image is up to date for nginx:alpine
+[2026-11-27T08:27:40.162Z] docker.io/library/nginx:alpine
+[2026-11-27T08:27:40.162Z] + echo Building Docker image...
+[2026-11-27T08:27:40.162Z] Building Docker image...
+[2026-11-27T08:27:40.162Z] + docker build --progress=plain --pull -t suri175/kanban-dashboard:7-00b2fbc7de93 .
+[2026-11-27T08:27:41.074Z] #0 building with "default" instance using docker driver
+[2026-11-27T08:27:41.074Z] 
+[2026-11-27T08:27:41.074Z] #1 [internal] load build definition from Dockerfile
+[2026-11-27T08:27:41.074Z] #1 transferring dockerfile: 1.33kB 0.0s done
+[2026-11-27T08:27:41.074Z] #1 DONE 0.0s
+[2026-11-27T08:27:41.074Z] 
+[2026-11-27T08:27:41.074Z] #2 [internal] load metadata for docker.io/library/node:22-alpine
+[2026-11-27T08:27:41.625Z] #2 ...
+[2026-11-27T08:27:41.625Z] 
+[2026-11-27T08:27:41.625Z] #3 [auth] library/nginx:pull token for registry-1.docker.io
+[2026-11-27T08:27:41.625Z] #3 DONE 0.0s
+[2026-11-27T08:27:41.625Z] 
+[2026-11-27T08:27:41.625Z] #4 [auth] library/node:pull token for registry-1.docker.io
+[2026-11-27T08:27:41.625Z] #4 DONE 0.0s
+[2026-11-27T08:27:41.876Z] 
+[2026-11-27T08:27:41.876Z] #5 [internal] load metadata for docker.io/library/nginx:alpine
+[2026-11-27T08:27:42.127Z] #5 DONE 1.2s
+[2026-11-27T08:27:42.127Z] 
+[2026-11-27T08:27:42.127Z] #2 [internal] load metadata for docker.io/library/node:22-alpine
+[2026-11-27T08:27:42.127Z] #2 DONE 1.2s
+[2026-11-27T08:27:42.127Z] 
+[2026-11-27T08:27:42.127Z] #6 [internal] load .dockerignore
+[2026-11-27T08:27:42.127Z] #6 transferring context: 125B done
+[2026-11-27T08:27:42.127Z] #6 DONE 0.0s
+[2026-11-27T08:27:42.127Z] 
+[2026-11-27T08:27:42.127Z] #7 [runtime 1/4] FROM docker.io/library/nginx:alpine@sha256:7fc0fb4af7bf006aeb31aea88069976060f8f0a0a86b667126742cc17f4e31ae
+[2026-11-27T08:27:42.127Z] #7 resolve docker.io/library/nginx:alpine@sha256:7fc0fb4af7bf006aeb31aea88069976060f8f0a0a86b667126742cc17f4e31ae 0.0s done
+[2026-11-27T08:27:42.127Z] #7 DONE 0.0s
+[2026-11-27T08:27:42.127Z] 
+[2026-11-27T08:27:42.127Z] #8 [builder 1/6] FROM docker.io/library/node:22-alpine@sha256:1314fb30ec37592d5845e5a160d522c0e680972aa534549940b8d73bde88481a
+[2026-11-27T08:27:42.127Z] #8 resolve docker.io/library/node:22-alpine@sha256:1314fb30ec37592d5845e5a160d522c0e680972aa534549940b8d73bde88481a 0.0s done
+[2026-11-27T08:27:42.127Z] #8 DONE 0.0s
+[2026-11-27T08:27:42.127Z] 
+[2026-11-27T08:27:42.127Z] #9 [internal] load build context
+[2026-11-27T08:27:42.378Z] #9 transferring context: 1.55kB done
+[2026-11-27T08:27:42.378Z] #9 DONE 0.0s
+[2026-11-27T08:27:42.378Z] 
+[2026-11-27T08:27:42.378Z] #10 [runtime 2/4] RUN addgroup -S appgroup &&     adduser -S appuser -G appgroup &&     mkdir -p /var/cache/nginx /var/run       /tmp/nginx/client_temp /tmp/nginx/proxy_temp       /tmp/nginx/fastcgi_temp /tmp/nginx/uwsgi_temp       /tmp/nginx/scgi_temp /usr/share/nginx/html &&     chown -R appuser:appgroup       /var/cache/nginx /var/run /tmp/nginx       /usr/share/nginx/html
+[2026-11-27T08:27:42.378Z] #10 CACHED
+[2026-11-27T08:27:42.378Z] 
+[2026-11-27T08:27:42.378Z] #11 [builder 2/6] WORKDIR /app
+[2026-11-27T08:27:42.378Z] #11 CACHED
+[2026-11-27T08:27:42.378Z] 
+[2026-11-27T08:27:42.378Z] #12 [runtime 3/4] COPY nginx.conf /etc/nginx/nginx.conf
+[2026-11-27T08:27:42.378Z] #12 CACHED
+[2026-11-27T08:27:42.378Z] 
+[2026-11-27T08:27:42.378Z] #13 [builder 3/6] COPY package*.json ./
+[2026-11-27T08:27:42.378Z] #13 CACHED
+[2026-11-27T08:27:42.378Z] 
+[2026-11-27T08:27:42.378Z] #14 [builder 4/6] RUN npm ci     --fetch-retries=5     --fetch-retry-mintimeout=20000     --fetch-retry-maxtimeout=120000     --fetch-timeout=300000
+[2026-11-27T08:27:50.405Z] #14 8.092 npm warn deprecated react-beautiful-dnd@13.1.1: react-beautiful-dnd is now deprecated. Context and options: https://github.com/atlassian/react-beautiful-dnd/issues/2672
+[2026-11-27T08:28:36.925Z] #14 52.28 
+[2026-11-27T08:28:36.925Z] #14 52.28 added 216 packages, and audited 217 packages in 51s
+[2026-11-27T08:28:36.925Z] #14 52.28 
+[2026-11-27T08:28:36.925Z] #14 52.28 54 packages are looking for funding
+[2026-11-27T08:28:36.925Z] #14 52.28   run `npm fund` for details
+[2026-11-27T08:28:36.925Z] #14 52.53 
+[2026-11-27T08:28:36.925Z] #14 52.53 19 vulnerabilities (1 low, 9 moderate, 9 high)
+[2026-11-27T08:28:36.925Z] #14 52.53 
+[2026-11-27T08:28:36.925Z] #14 52.53 To address all issues, run:
+[2026-11-27T08:28:36.925Z] #14 52.53   npm audit fix
+[2026-11-27T08:28:36.925Z] #14 52.53 
+[2026-11-27T08:28:36.925Z] #14 52.53 Run `npm audit` for details.
+[2026-11-27T08:28:36.925Z] #14 52.53 npm notice
+[2026-11-27T08:28:36.925Z] #14 52.53 npm notice New major version of npm available! 10.9.9 -> 12.2.3
+[2026-11-27T08:28:36.925Z] #14 52.53 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.3
+[2026-11-27T08:28:36.925Z] #14 52.53 npm notice To update run: npm install -g npm@12.2.3
+[2026-11-27T08:28:36.925Z] #14 52.53 npm notice
+[2026-11-27T08:28:36.925Z] #14 DONE 52.7s
+[2026-11-27T08:28:36.925Z] 
+[2026-11-27T08:28:36.925Z] #15 [builder 5/6] COPY . .
+[2026-11-27T08:28:36.925Z] #15 DONE 0.1s
+[2026-11-27T08:28:36.925Z] 
+[2026-11-27T08:28:36.925Z] #16 [builder 6/6] RUN npm run lint && npm run build
+[2026-11-27T08:28:36.925Z] #16 0.383 
+[2026-11-27T08:28:36.925Z] #16 0.383 > kanban-style-task-manager@0.0.0 lint
+[2026-11-27T08:28:36.926Z] #16 0.383 > eslint .
+[2026-11-27T08:28:36.926Z] #16 0.383 
+[2026-11-27T08:28:40.158Z] #16 4.831 
+[2026-11-27T08:28:40.158Z] #16 4.831 > kanban-style-task-manager@0.0.0 build
+[2026-11-27T08:28:40.158Z] #16 4.831 > tsc -b && vite build
+[2026-11-27T08:28:40.158Z] #16 4.831 
+[2026-11-27T08:28:45.355Z] #16 9.355 vite v8.0.1 building client environment for production...
+[2026-11-27T08:28:45.355Z] #16 9.372 [2K[2026-11-27T08:28:45.355Z] transforming...✓ 71 modules transformed.
+[2026-11-27T08:28:45.355Z] #16 9.931 rendering chunks...
+[2026-11-27T08:28:45.355Z] #16 10.01 computing gzip size...
+[2026-11-27T08:28:45.356Z] #16 10.02 dist/index.html                   0.47 kB │ gzip:  0.30 kB
+[2026-11-27T08:28:45.356Z] #16 10.02 dist/assets/index-B_Wo87YQ.css   18.26 kB │ gzip:  4.69 kB
+[2026-11-27T08:28:45.356Z] #16 10.02 dist/assets/index-C3Ba9GGb.js   263.42 kB │ gzip: 80.86 kB
+[2026-11-27T08:28:45.356Z] #16 10.02 
+[2026-11-27T08:28:45.356Z] #16 10.02 ✓ built in 661ms
+[2026-11-27T08:28:45.356Z] #16 DONE 10.2s
+[2026-11-27T08:28:45.356Z] 
+[2026-11-27T08:28:45.356Z] #17 [runtime 4/4] COPY --from=builder --chown=appuser:appgroup     /app/dist /usr/share/nginx/html
+[2026-11-27T08:28:45.608Z] #17 DONE 0.1s
+[2026-11-27T08:28:45.608Z] 
+[2026-11-27T08:28:45.608Z] #18 exporting to image
+[2026-11-27T08:28:45.608Z] #18 exporting layers
+[2026-11-27T08:28:45.858Z] #18 exporting layers 0.2s done
+[2026-11-27T08:28:45.859Z] #18 exporting manifest sha256:f67234a2e2f02461bdd36ae318cc3eea6b3d08a87e18b9c00598705551ce902e 0.0s done
+[2026-11-27T08:28:45.859Z] #18 exporting config sha256:c41c2c7c5b1453ff8cd8b53af2a32f29c17c8e4d24824bc51d0119c34fe12741 0.0s done
+[2026-11-27T08:28:45.859Z] #18 exporting attestation manifest sha256:4677bc297142a452307420520ca9b9374f2e3525113b73c335c68542e54b49ae 0.0s done
+[2026-11-27T08:28:45.859Z] #18 exporting manifest list sha256:62a29c45708d7879e974fb91108f5f8796942613286b66d1f89cc42ed1280cca 0.0s done
+[2026-11-27T08:28:45.859Z] #18 naming to docker.io/suri175/kanban-dashboard:7-00b2fbc7de93
+[2026-11-27T08:28:45.859Z] #18 naming to docker.io/suri175/kanban-dashboard:7-00b2fbc7de93 done
+[2026-11-27T08:28:45.859Z] #18 unpacking to docker.io/suri175/kanban-dashboard:7-00b2fbc7de93 0.1s done
+[2026-11-27T08:28:45.859Z] #18 DONE 0.4s
+[2026-11-27T08:28:46.110Z] + echo Docker build completed
+[2026-11-27T08:28:46.110Z] Docker build completed
+[2026-11-27T08:28:46.110Z] + docker images
+[2026-11-27T08:28:46.361Z] IMAGE                                     ID             DISK USAGE   CONTENT SIZE   EXTRA
+[2026-11-27T08:28:46.361Z] nginx:alpine                              7fc0fb4af7bf        103MB         29.7MB        
+[2026-11-27T08:28:46.361Z] node:22-alpine                            1314fb30ec37        239MB         61.8MB        
+[2026-11-27T08:28:46.361Z] suri175/kanban-dashboard:7-00b2fbc7de93   62a29c45708d        103MB         28.9MB        
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker Registry Push)
+[Pipeline] sh
+[2026-11-27T08:28:46.788Z] + set -eu
+[2026-11-27T08:28:46.788Z] + echo Pushing image: suri175/kanban-dashboard:7-00b2fbc7de93
+[2026-11-27T08:28:46.788Z] Pushing image: suri175/kanban-dashboard:7-00b2fbc7de93
+[2026-11-27T08:28:46.788Z] + docker push suri175/kanban-dashboard:7-00b2fbc7de93
+[2026-11-27T08:28:46.788Z] The push refers to repository [docker.io/suri175/kanban-dashboard]
+[2026-11-27T08:28:46.788Z] 335dce46c349: Waiting
+[2026-11-27T08:28:46.788Z] 881fc932939e: Waiting
+[2026-11-27T08:28:46.788Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:46.788Z] 272cbe758287: Waiting
+[2026-11-27T08:28:46.788Z] 272cbe758287: Waiting
+[2026-11-27T08:28:46.788Z] 335dce46c349: Waiting
+[2026-11-27T08:28:46.788Z] 881fc932939e: Waiting
+[2026-11-27T08:28:46.788Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:47.042Z] 881fc932939e: Waiting
+[2026-11-27T08:28:47.042Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:47.042Z] 272cbe758287: Waiting
+[2026-11-27T08:28:47.042Z] 335dce46c349: Waiting
+[2026-11-27T08:28:47.042Z] 272cbe758287: Waiting
+[2026-11-27T08:28:47.042Z] 335dce46c349: Waiting
+[2026-11-27T08:28:47.042Z] 881fc932939e: Waiting
+[2026-11-27T08:28:47.042Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:47.293Z] 272cbe758287: Waiting
+[2026-11-27T08:28:47.293Z] 335dce46c349: Waiting
+[2026-11-27T08:28:47.293Z] 881fc932939e: Waiting
+[2026-11-27T08:28:47.293Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:47.293Z] 272cbe758287: Waiting
+[2026-11-27T08:28:47.293Z] 335dce46c349: Waiting
+[2026-11-27T08:28:47.293Z] 881fc932939e: Waiting
+[2026-11-27T08:28:47.293Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:47.293Z] 335dce46c349: Waiting
+[2026-11-27T08:28:47.293Z] 881fc932939e: Waiting
+[2026-11-27T08:28:47.293Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:47.293Z] 272cbe758287: Waiting
+[2026-11-27T08:28:47.544Z] 272cbe758287: Waiting
+[2026-11-27T08:28:47.544Z] 335dce46c349: Waiting
+[2026-11-27T08:28:47.544Z] 881fc932939e: Waiting
+[2026-11-27T08:28:47.544Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:47.544Z] 881fc932939e: Waiting
+[2026-11-27T08:28:47.544Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:47.544Z] 272cbe758287: Waiting
+[2026-11-27T08:28:47.544Z] 335dce46c349: Waiting
+[2026-11-27T08:28:47.794Z] 272cbe758287: Waiting
+[2026-11-27T08:28:47.794Z] 335dce46c349: Waiting
+[2026-11-27T08:28:47.794Z] 881fc932939e: Waiting
+[2026-11-27T08:28:47.794Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:47.794Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:47.794Z] fbbe454312b9: Waiting
+[2026-11-27T08:28:47.794Z] 272cbe758287: Layer already exists
+[2026-11-27T08:28:47.794Z] 335dce46c349: Waiting
+[2026-11-27T08:28:47.794Z] 881fc932939e: Waiting
+[2026-11-27T08:28:47.794Z] 881fc932939e: Waiting
+[2026-11-27T08:28:47.794Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:47.794Z] fbbe454312b9: Waiting
+[2026-11-27T08:28:47.794Z] 335dce46c349: Waiting
+[2026-11-27T08:28:48.045Z] 96001c9779a1: Waiting
+[2026-11-27T08:28:48.045Z] 335dce46c349: Waiting
+[2026-11-27T08:28:48.045Z] 881fc932939e: Layer already exists
+[2026-11-27T08:28:48.045Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:48.045Z] fbbe454312b9: Waiting
+[2026-11-27T08:28:48.045Z] 96001c9779a1: Waiting
+[2026-11-27T08:28:48.045Z] 335dce46c349: Waiting
+[2026-11-27T08:28:48.045Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:48.045Z] fbbe454312b9: Waiting
+[2026-11-27T08:28:48.296Z] 96001c9779a1: Layer already exists
+[2026-11-27T08:28:48.296Z] 335dce46c349: Waiting
+[2026-11-27T08:28:48.296Z] 85b05bfd25bc: Waiting
+[2026-11-27T08:28:48.296Z] 44136fa355b3: Waiting
+[2026-11-27T08:28:48.296Z] fbbe454312b9: Layer already exists
+[2026-11-27T08:28:48.296Z] e9820988621b: Waiting
+[2026-11-27T08:28:48.296Z] 85b05bfd25bc: Waiting
+[2026-11-27T08:28:48.296Z] e9820988621b: Waiting
+[2026-11-27T08:28:48.296Z] 335dce46c349: Waiting
+[2026-11-27T08:28:48.296Z] e9820988621b: Layer already exists
+[2026-11-27T08:28:48.296Z] 3623869d224d: Waiting
+[2026-11-27T08:28:48.296Z] 335dce46c349: Waiting
+[2026-11-27T08:28:48.296Z] 85b05bfd25bc: Layer already exists
+[2026-11-27T08:28:48.296Z] e5f8fe67c1e1: Waiting
+[2026-11-27T08:28:48.547Z] 3623869d224d: Waiting
+[2026-11-27T08:28:48.547Z] e5f8fe67c1e1: Waiting
+[2026-11-27T08:28:48.547Z] 72706bbc6b27: Waiting
+[2026-11-27T08:28:48.547Z] e5f8fe67c1e1: Layer already exists
+[2026-11-27T08:28:48.547Z] 9854f98509d8: Waiting
+[2026-11-27T08:28:48.547Z] 3623869d224d: Layer already exists
+[2026-11-27T08:28:48.800Z] 72706bbc6b27: Waiting
+[2026-11-27T08:28:48.800Z] 9854f98509d8: Waiting
+[2026-11-27T08:28:48.800Z] 9854f98509d8: Waiting
+[2026-11-27T08:28:48.800Z] 72706bbc6b27: Waiting
+[2026-11-27T08:28:48.800Z] 72706bbc6b27: Waiting
+[2026-11-27T08:28:48.800Z] 9854f98509d8: Waiting
+[2026-11-27T08:28:49.051Z] 9854f98509d8: Waiting
+[2026-11-27T08:28:49.051Z] 95a67bef677d: Waiting
+[2026-11-27T08:28:49.051Z] 72706bbc6b27: Waiting
+[2026-11-27T08:28:49.051Z] 44136fa355b3: Pushed
+[2026-11-27T08:28:49.051Z] 95a67bef677d: Waiting
+[2026-11-27T08:28:49.301Z] 95a67bef677d: Waiting
+[2026-11-27T08:28:49.301Z] 335dce46c349: Pushed
+[2026-11-27T08:28:49.301Z] 95a67bef677d: Waiting
+[2026-11-27T08:28:49.301Z] 95a67bef677d: Waiting
+[2026-11-27T08:28:49.853Z] 72706bbc6b27: Pushed
+[2026-11-27T08:28:49.853Z] 9854f98509d8: Pushed
+[2026-11-27T08:28:50.404Z] 95a67bef677d: Pushed
+[2026-11-27T08:28:53.633Z] 7-00b2fbc7de93: digest: sha256:62a29c45708d7879e974fb91108f5f8796942613286b66d1f89cc42ed1280cca size: 856
+[2026-11-27T08:28:53.633Z] + echo Image pushed successfully
+[2026-11-27T08:28:53.633Z] Image pushed successfully
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to EC2)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+[2026-11-27T08:28:54.112Z] + docker inspect --format={{.Config.Image}} kanban-app
+[2026-11-27T08:28:54.112Z] + true
+[Pipeline] echo
+[2026-11-27T08:28:54.157Z] Previous image: 
+[Pipeline] sh
+[2026-11-27T08:28:54.443Z] + set -eu
+[2026-11-27T08:28:54.443Z] + echo Pulling new image...
+[2026-11-27T08:28:54.443Z] Pulling new image...
+[2026-11-27T08:28:54.443Z] + docker pull suri175/kanban-dashboard:7-00b2fbc7de93
+[2026-11-27T08:28:55.787Z] 7-00b2fbc7de93: Pulling from suri175/kanban-dashboard
+[2026-11-27T08:28:56.038Z] Digest: sha256:62a29c45708d7879e974fb91108f5f8796942613286b66d1f89cc42ed1280cca
+[2026-11-27T08:28:56.038Z] Status: Image is up to date for suri175/kanban-dashboard:7-00b2fbc7de93
+[2026-11-27T08:28:56.038Z] docker.io/suri175/kanban-dashboard:7-00b2fbc7de93
+[Pipeline] sh
+[2026-11-27T08:28:56.329Z] + set -eu
+[2026-11-27T08:28:56.329Z] + echo Stopping previous container...
+[2026-11-27T08:28:56.329Z] Stopping previous container...
+[2026-11-27T08:28:56.329Z] + docker rm -f kanban-app
+[2026-11-27T08:28:56.329Z] + echo Starting new application container...
+[2026-11-27T08:28:56.329Z] Starting new application container...
+[2026-11-27T08:28:56.329Z] + docker run -d --name kanban-app --restart unless-stopped --memory=512m --cpus=1 -p 80:8080 suri175/kanban-dashboard:7-00b2fbc7de93
+[2026-11-27T08:28:56.329Z] 1dbb451a1b44d98093a1a2add1b8a75248b24d0445218c8aadd12b6788d9a9cb
+[2026-11-27T08:28:56.881Z] + echo Container deployment completed
+[2026-11-27T08:28:56.881Z] Container deployment completed
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Health Check)
+[Pipeline] sh
+[2026-11-27T08:28:57.346Z] + set -eu
+[2026-11-27T08:28:57.346Z] + HEALTHY=0
+[2026-11-27T08:28:57.346Z] + echo Checking application health...
+[2026-11-27T08:28:57.346Z] Checking application health...
+[2026-11-27T08:28:57.346Z] + seq 1 30
+[2026-11-27T08:28:57.346Z] + docker inspect --format={{.State.Health.Status}} kanban-app
+[2026-11-27T08:28:57.346Z] + STATUS=starting
+[2026-11-27T08:28:57.346Z] + curl -s -o /dev/null --max-time 3 -w %{http_code} http://127.0.0.1/
+[2026-11-27T08:28:57.346Z] + HTTP_CODE=200
+[2026-11-27T08:28:57.346Z] + echo Attempt 1: Health=starting HTTP=200
+[2026-11-27T08:28:57.346Z] Attempt 1: Health=starting HTTP=200
+[2026-11-27T08:28:57.346Z] + [ starting = healthy ]
+[2026-11-27T08:28:57.346Z] + sleep 5
+[2026-11-27T08:29:02.543Z] + docker inspect --format={{.State.Health.Status}} kanban-app
+[2026-11-27T08:29:02.543Z] + STATUS=healthy
+[2026-11-27T08:29:02.543Z] + curl -s -o /dev/null --max-time 3 -w %{http_code} http://127.0.0.1/
+[2026-11-27T08:29:02.543Z] + HTTP_CODE=200
+[2026-11-27T08:29:02.543Z] + echo Attempt 2: Health=healthy HTTP=200
+[2026-11-27T08:29:02.543Z] Attempt 2: Health=healthy HTTP=200
+[2026-11-27T08:29:02.543Z] + [ healthy = healthy ]
+[2026-11-27T08:29:02.543Z] + [ 200 = 200 ]
+[2026-11-27T08:29:02.543Z] + HEALTHY=1
+[2026-11-27T08:29:02.543Z] + break
+[2026-11-27T08:29:02.543Z] + [ 1 -ne 1 ]
+[2026-11-27T08:29:02.543Z] + echo Application is healthy
+[2026-11-27T08:29:02.543Z] Application is healthy
+[2026-11-27T08:29:02.543Z] + docker ps
+[2026-11-27T08:29:02.543Z] CONTAINER ID   IMAGE                                     COMMAND                  CREATED         STATUS                   PORTS                                             NAMES
+[2026-11-27T08:29:02.544Z] 1dbb451a1b44   suri175/kanban-dashboard:7-00b2fbc7de93   "/docker-entrypoint.…"   6 seconds ago   Up 5 seconds (healthy)   80/tcp, 0.0.0.0:80->8080/tcp, [::]:80->8080/tcp   kanban-app
+[2026-11-27T08:29:02.544Z] + echo Deployment successful
+[2026-11-27T08:29:02.544Z] Deployment successful
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] sh
+[2026-11-27T08:29:03.030Z] + docker logout
+[2026-11-27T08:29:03.031Z] Removing login credentials for https://index.docker.io/v1/
+[Pipeline] echo
+[2026-11-27T08:29:03.063Z] Pipeline execution completed.
+[Pipeline] echo
+[2026-11-27T08:29:03.122Z] 
+[2026-11-27T08:29:03.122Z]             ========================================
+[2026-11-27T08:29:03.122Z]             SUCCESS: Application deployed
+[2026-11-27T08:29:03.122Z]             Image: suri175/kanban-dashboard:7-00b2fbc7de93
+[2026-11-27T08:29:03.122Z]             Container: kanban-app
+[2026-11-27T08:29:03.122Z]             URL: http://EC2-PUBLIC-IP
+[2026-11-27T08:29:03.122Z]             ========================================
+[2026-11-27T08:29:03.122Z]             
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // timeout
+[Pipeline] }
+[Pipeline] // timestamps
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
