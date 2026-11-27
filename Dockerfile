@@ -1,4 +1,3 @@
-
 # Stage 1: Build React application
 FROM node:22-alpine AS builder
 
@@ -14,7 +13,7 @@ RUN npm ci
 COPY . .
 
 # Build production application
-RUN npm run build
+RUN npm run lint && npm run build
 
 
 # Stage 2: Production runtime
@@ -23,9 +22,13 @@ FROM nginx:alpine AS runtime
 # Create non-root user
 RUN addgroup -S appgroup && \
     adduser -S appuser -G appgroup && \
-    mkdir -p /var/cache/nginx /var/run /tmp/nginx && \
+    mkdir -p /var/cache/nginx /var/run \
+      /tmp/nginx/client_temp /tmp/nginx/proxy_temp \
+      /tmp/nginx/fastcgi_temp /tmp/nginx/uwsgi_temp \
+      /tmp/nginx/scgi_temp /usr/share/nginx/html && \
     chown -R appuser:appgroup \
-      /var/cache/nginx /var/run /tmp/nginx /usr/share/nginx/html
+      /var/cache/nginx /var/run /tmp/nginx \
+      /usr/share/nginx/html
 
 # Copy custom Nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
